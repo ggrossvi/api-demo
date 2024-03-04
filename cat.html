@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        #log {
+            width: 300 px; 
+            height: auto; 
+        }
+    </style>
+
+</head>
+<body>
+    <button onClick="getData()">Get Data</button>
+    <p id="log"></p>
+    <script>
+      
+            function getData(){
+        
+                fetch("https://api.thecatapi.com/v1/images/search?limit=1")
+                
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Could not fetch resource!");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var url = data[0].url;
+                    document.getElementById('log').innerHTML = `<img src="${url}" alt="cat">`;
+                })
+                .catch(error => console.error(error));
+            }
+        
+    </script>
+</body>
+</html>
+
+
